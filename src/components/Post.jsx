@@ -1,27 +1,16 @@
 import { useState } from "react";
 
 import EditData from "./EditData";
-
+import DeleteData from "./DeleteData";
 import {
   Box,
   Card,
   CardContent,
   Typography,
   Button,
+  Modal,
+  TextField,
 } from "@mui/material";
-
-
-// const style = {
-//   position: "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: 600,
-//   bgcolor: "background.paper",
-//   border: "2px solid #ced4da",
-//   boxShadow: 24,
-//   p: 4,
-// };
 
 function Post({ data }) {
   const [userData, setUserData] = useState("");
@@ -32,17 +21,18 @@ function Post({ data }) {
   const handleOpen = () => {
     setUserData(data);
   };
+  const [open2, setOpener] = useState(false);
+  const handleOpen2 = () => setOpener(true);
+  const handleClose2 = () => setOpener(false);
   return (
     <>
       <Box
-        sx={
-          {
-            width: "80%",
-            height: 150,
-            marginTop: "10px",
-            margin: " 10px auto",
-          }
-        }
+        sx={{
+          width: "80%",
+          height: 150,
+          marginTop: "10px",
+          margin: " 10px auto",
+        }}
       >
         <Card
           sx={{
@@ -63,10 +53,14 @@ function Post({ data }) {
             <Button variant="contained" onClick={handleOpen}>
               EDIT
             </Button>
+            <Button variant="outlined" onClick={handleOpen2}>
+              Delete
+            </Button>
           </CardContent>
         </Card>
       </Box>
       {userData && <EditData data={userData} handleClose={handleClose} />}
+      <DeleteData open2={open2} handleClose2={handleClose2} />
     </>
   );
 }
