@@ -23,7 +23,9 @@ function Post({ data }) {
   };
   const [open2, setOpener] = useState(false);
   const handleOpen2 = () => setOpener(true);
-  const handleClose2 = () => setOpener(false);
+  const handleClose2 = () => {
+    setOpener(false);
+  }
   return (
     <>
       <Box
@@ -60,7 +62,7 @@ function Post({ data }) {
         </Card>
       </Box>
       {userData && <EditData data={userData} handleClose={handleClose} />}
-      <DeleteData open2={open2} handleClose2={handleClose2} />
+      <DeleteData data = {data} open2={open2} handleClose2={handleClose2} />
     </>
   );
 }

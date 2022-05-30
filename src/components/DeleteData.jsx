@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { db} from "../firebase";
+import { doc,deleteDoc } from "firebase/firestore";
+
 import {
   TextField,
   Button,
@@ -25,10 +28,13 @@ const style = {
 
   
 
-function DeleteData({ open2, handleClose2 }) {
+function DeleteData({ open2, data,handleClose2 }) {
 
-  const onClickDelete = () =>{
-    
+
+  const onClickDelete = async () =>{
+    console.log(data);
+    await deleteDoc(doc(db, "students", data.id));
+    handleClose2();
   }
 
   return (
