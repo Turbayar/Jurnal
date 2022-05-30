@@ -1,24 +1,12 @@
-
-import React from "react";
 import NavBar from "../components/Navbar";
 import PostList from "../components/PostList";
-import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
-  root: {
-    // backgroundColor: "blue"
-  },
-});
-
-const Dashboard = ({user}) => {
-  const { root } = useStyles();
+const Dashboard = ({ user }) => {
   return (
-    <div className={root}>
-      <CssBaseline />
-      <NavBar user={user}/>
+    <>
+      <NavBar user={user} />
 
       <main>
         <Container maxWidth="sm">
@@ -29,7 +17,7 @@ const Dashboard = ({user}) => {
             gutterBottom
             sx={{ marginTop: "100px" }}
           >
-            Postloy
+            Journal
           </Typography>
           <Typography
             variant="h5"
@@ -37,14 +25,12 @@ const Dashboard = ({user}) => {
             color="textSecondary"
             paragraph
           >
-            Discover stories, thinking, and expertise from writers on any topic.
+            Let's make the teacher's journal easier.
           </Typography>
         </Container>
-        <PostList />
       </main>
-
-     
-    </div>
+      <PostList />
+    </>
   );
 };
 

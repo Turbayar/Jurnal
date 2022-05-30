@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./WritingArticle.css";
 import { db } from "../../firebase";
 import {
@@ -9,15 +10,16 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-import Box from "@mui/material/Box";
-import Input from "@mui/material/Input";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Input,
+  Card,
+  Modal,
+  Typography,
+  TextField,
+  Button,
+} from "@mui/material";
 
-import { TextField } from "@mui/material";
-import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -32,27 +34,30 @@ const style = {
 };
 
 export default function WritingArticle() {
-  const [post, setPost] = useState("");
-  const [header, setHeader] = useState("");
-  const [description, setDescription] = useState("");
+  const [userData, setUserData] = useState({
+    post: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+  });
+
+  const { post, firstName, lastName, phoneNumber } = userData;
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const onClickPost = async () => {
-    if (post.length !== 0 && header.length !== 0) {
-      const docRef = await addDoc(collection(db, "posts"), {
-        article: post,
-        description: description,
-        header: header,
-        status: false,
+    if (post.length !== 0 && firstName !== 0) {
+      const docRef = await addDoc(collection(db, "students"), {
+        class: post,
+        lastName: lastName,
+        firstName: firstName,
+        phoneNumber: phoneNumber,
       });
-      setPost("");
-      setHeader("");
-      setDescription("");
 
       alert("Succefully sent");
+      handleClose();
     } else {
       alert("Please fill");
     }
@@ -79,22 +84,38 @@ export default function WritingArticle() {
             </Link>
           </Box>
           <TextField
-            value={header}
-            onChange={(e) => setHeader(e.target.value)}
-            label="header"
+            value={firstName}
+            onChange={(e) => {
+              setUserData((prev) => ({ ...prev, firstName: e.target.value }));
+            }}
+            label="First name"
             required
             margin="dense"
           />
           <TextField
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            label="description"
+            value={lastName}
+            onChange={(e) => {
+              setUserData((prev) => ({ ...prev, lastName: e.target.value }));
+            }}
+            label="Latname"
             margin="dense"
           />
           <TextField
-            label="article"
-            onChange={(e) => setPost(e.target.value)}
+            label="class"
+            onChange={(e) => {
+              setUserData((prev) => ({ ...prev, post: e.target.value }));
+            }}
             value={post}
+            margin="dense"
+            multiline
+            maxRows={50}
+          />
+          <TextField
+            label="phone-number"
+            onChange={(e) => {
+              setUserData((prev) => ({ ...prev, phoneNumber: e.target.value }));
+            }}
+            value={phoneNumber}
             margin="dense"
             multiline
             maxRows={50}
@@ -104,8 +125,9 @@ export default function WritingArticle() {
             variant="contained"
             sx={{ margin: "20px auto", width: "70%" }}
           >
-            Post
+            Save
           </Button>
+
           <Modal
             open={open}
             onClose={handleClose}
@@ -123,11 +145,15 @@ export default function WritingArticle() {
                 Are you sure to post?
               </Typography>
               <Button onClick={onClickPost}> Yes </Button>
-              
-                <Button onClick={handleClose} variant="outlined" sizeSmall sx={{ width: "0.1%" }}>
-                  noo
-                </Button>
-              
+
+              <Button
+                onClick={handleClose}
+                variant="outlined"
+                sizeSmall
+                sx={{ width: "0.1%" }}
+              >
+                No
+              </Button>
             </Box>
           </Modal>
         </Card>

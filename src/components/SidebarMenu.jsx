@@ -1,21 +1,25 @@
-import * as React from 'react';
-import { getAuth, signOut,onAuthStateChanged  } from "firebase/auth";
-import Button from '@mui/material/Button';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import IconButton from "@mui/material/IconButton";
-import Stack from '@mui/material/Stack';
-import MenuIcon from "@mui/icons-material/Menu";
 
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+
+import {
+  ClickAwayListener,
+  Grow,
+  Paper,
+  Popper,
+  MenuItem,
+  MenuList,
+  IconButton,
+  Stack,
+} from "@mui/material";
+
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function MenuListComposition() {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -30,34 +34,32 @@ export default function MenuListComposition() {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setOpen(false);
     }
   }
 
   const onClickSignOut = async (event) => {
-    
     const auth = getAuth();
     try {
       await signOut(auth);
-      window.location.reload(false)
-       if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
+      window.location.reload(false);
+      if (anchorRef.current && anchorRef.current.contains(event.target)) {
+        return;
+      }
 
-    setOpen(false);
+      setOpen(false);
       console.log("asd");
     } catch (e) {
       console.log(e);
     }
-    
   };
 
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
+  const prevOpen = useRef(open);
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -66,21 +68,22 @@ export default function MenuListComposition() {
   }, [open]);
 
   return (
-    <Stack  direction="row" spacing={2}>
+    <Stack direction="row" spacing={2}>
       <div>
-        <Button
+        <IconButton
           ref={anchorRef}
           id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
+          aria-controls={open ? "composition-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
+          size="large"
+          edge="start"
+          aria-label="menu"
         >
-         <IconButton  size="large" edge="start" aria-label="menu" >
-         <MenuIcon style={{ color: "white" }} />
-         </IconButton>
+          <MenuIcon style={{ color: "white" }} />
+        </IconButton>
 
-        </Button>
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -94,7 +97,7 @@ export default function MenuListComposition() {
               {...TransitionProps}
               style={{
                 transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+                  placement === "bottom-start" ? "left top" : "left bottom",
               }}
             >
               <Paper>
@@ -105,12 +108,9 @@ export default function MenuListComposition() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <Link to = "/" style={{color:'black'}}> <MenuItem onClick={handleClose}>Dashboard</MenuItem> </Link>
-                    <Link to="/author/Articles" style={{color:'black'}}>
-                    <MenuItem onClick={handleClose}>View My Articles</MenuItem>
+                    <Link to="/" style={{ color: "black" }}>
+                      <MenuItem onClick={handleClose}>Dashboard</MenuItem>{" "}
                     </Link>
-                    
-                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                     <MenuItem onClick={onClickSignOut}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
