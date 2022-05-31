@@ -51,7 +51,7 @@ const Login = () => {
         admin: false,
       });
     console.log("done");
-    navigate("/writing");
+    navigate("/addStudent");
 }
 
   return (

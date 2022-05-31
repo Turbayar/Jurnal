@@ -10,6 +10,8 @@ import {
   onSnapshot,
   getDoc,
 } from "firebase/firestore";
+
+import { ThemeComponent } from "./theme";
 import WritingArticle from "./pages/WritingArticle/WritingArticle.jsx";
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/login/login.jsx";
@@ -44,6 +46,7 @@ function App() {
   }, []);
 
   return (
+    <ThemeComponent>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard user={user} />} />
@@ -51,6 +54,7 @@ function App() {
         <Route path="/addStudent" element={<WritingArticle />} />
       </Routes>
     </BrowserRouter>
+     </ThemeComponent>
   );
 }
 
