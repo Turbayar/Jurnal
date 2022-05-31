@@ -56,6 +56,13 @@ export default function WritingArticle() {
         phoneNumber: phoneNumber,
       });
 
+      setUserData({
+        post: "",
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
+      });
+  
       alert("Succefully sent");
       handleClose();
     } else {
@@ -78,7 +85,7 @@ export default function WritingArticle() {
         >
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Link to="/">
-              <Button variant="outlined" sizeSmall sx={{ width: "0.1%" }}>
+              <Button variant="outlined" sizesmall = "true" sx={{ width: "0.1%" }}>
                 x
               </Button>
             </Link>
@@ -149,7 +156,7 @@ export default function WritingArticle() {
               <Button
                 onClick={handleClose}
                 variant="outlined"
-                sizeSmall
+                sizesmall = "true"
                 sx={{ width: "0.1%" }}
               >
                 No

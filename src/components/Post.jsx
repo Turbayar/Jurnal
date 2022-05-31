@@ -48,7 +48,7 @@ function Post({ data }) {
         >
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2">
-              {data.name || ""} {data.lastName || ""}
+              {data.firstName || ""} {data.lastName || ""}
             </Typography>
             <Typography>Class : {data.class || ""}</Typography>
             <Typography>Phone: {data.phoneNumber || ""}</Typography>

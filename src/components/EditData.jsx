@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { db } from "../firebase";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+
 import {
   Dialog,
   DialogTitle,
@@ -12,12 +15,25 @@ import {
 function EditData({ data, handleClose }) {
   const [userData, setUserData] = useState({
     post: data.class,
-    firstName: data.name,
+    firstName: data.firstName,
     lastName: data.lastName,
     phoneNumber: data.phoneNumber,
   });
 
   const { post, firstName, lastName, phoneNumber } = userData;
+
+  const onClickSave = async () => {
+    const updateData = doc(db, "students", data.id);
+    await updateDoc(updateData, {
+      post: post,
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+    });
+    handleClose();
+  };
+
+  console.log(firstName)
 
   return (
     <Dialog open={data !== ""} onClose={handleClose}>
@@ -66,7 +82,7 @@ function EditData({ data, handleClose }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Save</Button>
+        <Button onClick={onClickSave}>Save</Button>
         <Button onClick={handleClose}>Cancel</Button>
       </DialogActions>
     </Dialog>

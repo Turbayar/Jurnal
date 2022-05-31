@@ -32,7 +32,6 @@ function DeleteData({ open2, data,handleClose2 }) {
 
 
   const onClickDelete = async () =>{
-    console.log(data);
     await deleteDoc(doc(db, "students", data.id));
     handleClose2();
   }
