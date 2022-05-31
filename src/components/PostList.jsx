@@ -10,6 +10,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
+import DataGridDemo from "./DataGrid";
+import EditData from "./EditData";
+import DeleteData from "./DeleteData";
+
 export default function PostList() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -29,11 +33,30 @@ export default function PostList() {
     return () => unsub();
   }, []);
 
+  const [userData, setUserData] = useState("");
+
+  const handleClose = () => {
+    setUserData("");
+  };
+  const handleOpen = (data) => {
+    setUserData(data);
+  };
+  const [open2, setOpener] = useState("");
+  const handleOpen2 = (data) => {
+    setOpener(data);
+  };
+  const handleClose2 = () => {
+    setOpener('');
+  };
   return (
     <>
-      {posts?.map((cur, index) => (
-        <Post key={index} data={cur} />
-      ))}
+      <DataGridDemo
+        posts={posts}
+        handleOpen={handleOpen}
+        handleOpen2={handleOpen2}
+      />
+      {userData && <EditData data={userData} handleClose={handleClose} />}
+      <DeleteData open2={open2} handleClose2={handleClose2} />
     </>
   );
 }
