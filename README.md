@@ -1,5 +1,5 @@
 
-url: https://fir-auth-test-b358c.web.app/
+url: https://jurnal-f9f32.web.app/
 
 
 
