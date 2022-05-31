@@ -12,10 +12,11 @@ import {
 } from "firebase/firestore";
 
 import { ThemeComponent } from "./theme";
-import WritingArticle from "./pages/WritingArticle/WritingArticle.jsx";
+import addStudent from "./pages/AddStudent/AddStudent.jsx"
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/login/login.jsx";
 import "./App.css";
+import AddStudent from "./pages/AddStudent/AddStudent.jsx";
 
 function App() {
   const auth = getAuth();
@@ -51,7 +52,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard user={user} />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/addStudent" element={<WritingArticle />} />
+        <Route path="/addStudent" element={<AddStudent />} />
       </Routes>
     </BrowserRouter>
      </ThemeComponent>

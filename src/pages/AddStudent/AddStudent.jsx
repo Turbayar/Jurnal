@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./WritingArticle.css";
+import "./AddStudent.css";
 import { db } from "../../firebase";
 import {
   doc,
@@ -26,14 +26,14 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 600,
+  width: "80%",
   bgcolor: "background.paper",
   border: "2px solid #ced4da",
   boxShadow: 24,
   p: 4,
 };
 
-export default function WritingArticle() {
+export default function AddStudent() {
   const [userData, setUserData] = useState({
     post: "",
     firstName: "",
