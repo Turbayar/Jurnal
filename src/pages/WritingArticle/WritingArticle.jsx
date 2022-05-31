@@ -33,16 +33,6 @@ const style = {
   p: 4,
 };
 
-const boxStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 600,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-}
-
 export default function WritingArticle() {
   const [userData, setUserData] = useState({
     post: "",
@@ -73,18 +63,20 @@ export default function WritingArticle() {
         phoneNumber: "",
       });
   
+      alert("Succefully sent");
       handleClose();
     } else {
       alert("Please fill");
     }
   };
   return (
-    <Box sx={boxStyle}> 
-       <Card
+    <div className="box">
+      <div className="writing">
+        <Card
           color="primary"
           sx={{
             padding: "30px",
-            width: "100%",
+            width: "70%",
             height: "80%",
             display: "flex",
             flexDirection: "column",
@@ -172,7 +164,7 @@ export default function WritingArticle() {
             </Box>
           </Modal>
         </Card>
-    </Box>
-       
+      </div>
+    </div>
   );
 }
