@@ -21,7 +21,7 @@ export default function DataGridDemo({ posts, handleOpen, handleOpen2 }) {
       field: "class",
       headerName: "Class",
       type: "number",
-      width: 80,
+      width: 120,
       editable: false,
     },
 
@@ -30,7 +30,7 @@ export default function DataGridDemo({ posts, handleOpen, handleOpen2 }) {
       headerName: "Full name",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
-      width: 160,
+      width: 180,
       valueGetter: (params) =>
         `${params.row.firstName || ""} ${params.row.lastName || ""}`,
     },

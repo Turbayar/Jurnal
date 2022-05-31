@@ -63,7 +63,6 @@ export default function AddStudent() {
         phoneNumber: "",
       });
   
-      alert("Succefully sent");
       handleClose();
     } else {
       alert("Please fill");
